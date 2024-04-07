@@ -21,9 +21,12 @@ export class WeatherComponent {
   constructor(private weatherService: WeatherService){  }
 
   ngOnInit(): void {
-    this.weatherService.getWeather(this.city, this.units).subscribe({
+    this.getWeather(this.city, this.units)
+  }
+
+  getWeather(city: string, units: string): void{
+    this.weatherService.getWeather(city, units).subscribe({
       next: (res) => {
-        console.log(res)
         this.myWeather = res
         console.log(this.myWeather)
         this.temperature = this.myWeather.main.temp
@@ -39,5 +42,15 @@ export class WeatherComponent {
 
       complete: ()=>console.info('API call complete')
     })
+  }
+
+  onRadioButtonChange(){
+    if(this.units=='metric'){
+      this.units = 'imperial'
+    }
+    else{
+      this.units='metric'
+    }
+    this.getWeather(this.city, this.units)
   }
 }

@@ -2,15 +2,25 @@
     <div class="card text-white bg-primary m-5" style="max-width: 18rem;">
         <div class="card-header text-center">
             <h2>{{city}}</h2>
-            <p><img src="{{iconURL}}" alt="weather image"></p>
+            <img src="{{iconURL}}" alt="weather image">
         </div>
         <div class="card-body">
             <p class="card-text">Summary: {{summary}}</p>
-            <p class="card-text">Temperature: {{temperature}} &#8451;</p>
-            <p class="card-text">Feels like: {{feelsTemperature}} &#8451;</p>
+            <p class="card-text">Temperature: {{temperature}} {{units=='metric' ? '&#8451;' : '&#8457;'}}</p>
+            <p class="card-text">Feels like: {{feelsTemperature}} {{units=='metric' ? '&#8451;' : '&#8457;'}}</p>
             <p class="card-text">Pressure: {{pressure}} hPa</p>
             <p class="card-text">Humidity: {{humidity}} %</p>
             <p class="card-text"></p>
+        </div>
+        <div class="card-footer bg-transparent border-success">
+            <form class="myRadioButtons">
+                <label class="radio-inline">
+                  <input type="radio" (change)="onRadioButtonChange()" name="unitsRadioButton" [checked]="units=='metric' ? true : false">&#8451;
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" (change)="onRadioButtonChange()" name="unitsRadioButton" [checked]="units=='imperial' ? true : false">&#8457;
+                </label>
+              </form>
         </div>
   </div>
 </div>
